@@ -1,45 +1,57 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import HomeScreen from './screens/HomeScreen';
+import RecipesScreen from './screens/RecipesScreen';
+import RecipeDetailsScreen from './screens/RecipeDetailsScreen';
+import AboutScreen from './screens/AboutScreen';
+
+// These are the screens that can be used throughout the app.
+export type RootStackParamList = {
+  Home: undefined;
+  Recipes: undefined;
+  RecipeDetails: {
+    name: string;
+    category: string;
+    ingredients: string[];
+    directions: string[];
+  };
+  About: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'My Recipe Book'}}
+        />
+
+        <Stack.Screen
+          name="Recipes"
+          component={RecipesScreen}
+          options={{title: 'Recipes'}}
+        />
+
+        <Stack.Screen
+          name="RecipeDetails"
+          component={RecipeDetailsScreen}
+          options={{title: 'Recipe Details'}}
+        />
+
+        <Stack.Screen
+          name="About"
+          component={AboutScreen}
+          options={{title: 'About'}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
