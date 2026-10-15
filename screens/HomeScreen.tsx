@@ -30,6 +30,12 @@ function HomeScreen({navigation}: Props) {
       </TouchableOpacity>
 
       <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('AddRecipe')}>
+        <Text style={styles.buttonText}>Add a Recipe</Text>
+     </TouchableOpacity>
+
+      <TouchableOpacity
         style={styles.aboutButton}
         onPress={() => navigation.navigate('About')}>
         <Text style={styles.aboutButtonText}>About This App</Text>
