@@ -7,6 +7,7 @@ import RecipesScreen from './screens/RecipesScreen';
 import RecipeDetailsScreen from './screens/RecipeDetailsScreen';
 import AboutScreen from './screens/AboutScreen';
 import AddRecipeScreen from './screens/AddRecipeScreen';
+import ExploreRecipesScreen from './screens/ExploreRecipesScreen';
 
 // These are the screens that can be used throughout the app.
 export type RootStackParamList = {
@@ -20,6 +21,7 @@ export type RootStackParamList = {
   };
   About: undefined;
   AddRecipe: undefined;
+  ExploreRecipes: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -56,6 +58,12 @@ function App() {
           name="AddRecipe"
          component={AddRecipeScreen}
          options={{title: 'Add Recipe'}}
+       />
+
+        <Stack.Screen
+         name="ExploreRecipes"
+         component={ExploreRecipesScreen}
+         options={{title: 'Explore Recipes'}}
        />
        
       </Stack.Navigator>
